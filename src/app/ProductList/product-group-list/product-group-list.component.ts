@@ -8,6 +8,7 @@ import { Product } from '../../model/Product';
 /**
  * Component shows list of items and loops items of products
  */
+
 @Component({
   selector: 'app-product-group-list',
   standalone: true,
@@ -17,53 +18,71 @@ import { Product } from '../../model/Product';
   providers: [ProductService],
 })
 export class ProductGroupListComponent {
+  productsItrator: Product[];
   products: Product[];
-
-  p = new Product().addDetails(
-    123,
-    'Hui jo bhai',
-    20.99,
-    'Escape to your private oasis...',
-    'Hang Loose Hammocks',
-    12,
-    true,
-    4.9
-  );
+  brandName: string[];
 
   // dependency injection
   constructor(private ProductService: ProductService) {
     // using getter to load all data
-    this.products = this.ProductService.getProducts;
-    console.log(this.ProductService.getBrandName());
-    this.sortByRating(true);
+    this.productsItrator = this.products = this.ProductService.getProducts;
+    this.brandName = Array.from(new Set(ProductService.getBrandNames));
   }
 
-  addProduct() {
-    this.ProductService.addNewProduct = this.p;
-  }
-
+  /**
+   * Sorts by Product Price
+   *
+   * @param type
+   * false - low to hight
+   * true - high to low
+   */
   sortByPrice(type: boolean) {
-    // true - low to hight
-    // false - high to low
-    this.products = type
-      ? this.products.sort((a, b) => a.price - b.price)
-      : this.products.sort((a, b) => b.price - a.price);
+    this.productsItrator = type
+      ? this.products.sort(
+          (productA, productB) => productA.price - productB.price
+        )
+      : this.products.sort(
+          (productA, productB) => productB.price - productA.price
+        );
   }
+
+  /**
+   * Sorts by Product Rating
+   *
+   * @param type
+   * false - low to hight
+   * true - high to low
+   */
   sortByRating(type: boolean) {
-    // false - low to hight
-    // true - high to low
-    this.products = type
-      ? this.products.sort((a, b) => b.rating - a.rating)
-      : this.products.sort((a, b) => a.rating - b.rating);
+    this.productsItrator = type
+      ? this.products.sort(
+          (productA, productB) => productB.rating - productA.rating
+        )
+      : this.products.sort(
+          (productA, productB) => productA.rating - productB.rating
+        );
   }
+
+  /**
+   * Sorts by Product Usage
+   *
+   * @param type
+   * true - outdoor
+   * false - indoor
+   */
   sortByUsage(type: boolean) {
-    // true - outdoor
-    // false - indoor
-    this.products = type
+    this.productsItrator = type
       ? this.products.filter((i) => i.usage == true)
       : this.products.filter((i) => i.usage == false);
   }
+
   sortByBrand(name: string) {
-    this.products = this.products.filter((item) => item.brand == name);
+    if (name == 'default') {
+      this.productsItrator = this.products;
+      return;
+    }
+    this.productsItrator = this.products.filter((item) => item.brand == name);
   }
+
+  changePrice() {}
 }

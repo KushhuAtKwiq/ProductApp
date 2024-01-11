@@ -1,10 +1,32 @@
-<p>product-group-list works!</p>
+<header></header>
 
-<ul>
-  <li *ngFor="let product of products">
-    <a [routerLink]="[product.id]">show</a>
-    {{ product.name }} -- ${{ product.price }} -- {{ product.rating }}
-  </li>
-</ul>
+<main>
+  <aside class="filters">
+    <button type="button" (click)="changePrice()">
+      Price: <span>Low to High</span>
+    </button>
+    <button type="button">
+      Rating:
+      <span  (click)="sortByRating(true)">High to Low</span>
+      <span  (click)="sortByRating(false)">Low to High</span>
+    </button>
+    <button type="button" id="">Usage :<span>Indoor</span></button>
+    <select name="brand-filter" #brand (change)="sortByBrand(brand.value)">
+      <option value="default">Select Brand</option>
+      <option *ngFor="let product of brandName" [value]="product">
+        {{ product }}
+      </option>
+    </select>
+  </aside>
+  <section>
+    <ul>
+      <li *ngFor="let product of productsItrator">
+        <a [routerLink]="[product.id]">show</a>
+        {{ product.name }} -- ${{ product.price }} -- {{ product.rating }}
+        <hr />
+      </li>
+    </ul>
+  </section>
+</main>
 
 <router-outlet></router-outlet>

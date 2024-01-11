@@ -2,7 +2,7 @@ import { Product } from '../model/Product';
 
 export class ProductService {
   products: Product[] = [
-    new Product().addDetails(
+    new Product().add(
       10293,
       'Relaxing Oasis Hammock',
       79.99,
@@ -12,7 +12,7 @@ export class ProductService {
       true,
       4.9
     ),
-    new Product().addDetails(
+    new Product().add(
       45682,
       'Ultimate Support Executive Chair',
       249.99,
@@ -22,7 +22,7 @@ export class ProductService {
       false,
       4.7
     ),
-    new Product().addDetails(
+    new Product().add(
       87321,
       'Modern Ceramic Planter with Stand',
       39.99,
@@ -32,7 +32,7 @@ export class ProductService {
       false,
       4.5
     ),
-    new Product().addDetails(
+    new Product().add(
       98754,
       'Weatherproof Patio Dining Set',
       499.99,
@@ -42,7 +42,7 @@ export class ProductService {
       true,
       4.6
     ),
-    new Product().addDetails(
+    new Product().add(
       32165,
       'Reversible Woven Rug',
       99.99,
@@ -52,7 +52,7 @@ export class ProductService {
       true,
       4.8
     ),
-    new Product().addDetails(
+    new Product().add(
       74589,
       'Waterproof BoomBox Speaker',
       59.99,
@@ -62,7 +62,7 @@ export class ProductService {
       true,
       4.9
     ),
-    new Product().addDetails(
+    new Product().add(
       56712,
       'Adjustable Touch-Control Desk Lamp',
       49.99,
@@ -72,7 +72,7 @@ export class ProductService {
       false,
       4.8
     ),
-    new Product().addDetails(
+    new Product().add(
       23490,
       'Lightweight Carry-On Backpack',
       89.99,
@@ -82,7 +82,7 @@ export class ProductService {
       true,
       4.7
     ),
-    new Product().addDetails(
+    new Product().add(
       90125,
       '3-in-1 Fast Charging Dock',
       29.99,
@@ -92,7 +92,7 @@ export class ProductService {
       false,
       4.6
     ),
-    new Product().addDetails(
+    new Product().add(
       65438,
       'Immersive Wireless Headphones',
       199.99,
@@ -102,7 +102,7 @@ export class ProductService {
       true,
       4.9
     ),
-    new Product().addDetails(
+    new Product().add(
       17356,
       'Reusable Stainless Steel Bottle',
       24.99,
@@ -122,12 +122,18 @@ export class ProductService {
     this.products.push(product);
   }
 
+  /**
+   * Searches for a specific product in array
+   * @param productId
+   * @returns given Product
+   */
   public getProduct(productId: number): Product | undefined {
     return this.products.find((item) => item.id == productId);
     // return this.products[1];
   }
 
-  public getBrandName() {
+  // returns all the Brand Name
+  public get getBrandNames(): string[] {
     return this.products.map((item) => item.brand);
   }
 }

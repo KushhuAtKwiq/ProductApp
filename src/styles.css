@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ul,
+li {
+  list-style: none;
+}
+a,button {
+  all: unset;
+}
+a:hover,button:hover {
+  cursor: pointer;
+}
