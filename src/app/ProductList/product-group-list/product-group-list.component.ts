@@ -34,9 +34,36 @@ export class ProductGroupListComponent {
   constructor(private ProductService: ProductService) {
     // using getter to load all data
     this.products = this.ProductService.getProducts;
+    console.log(this.ProductService.getBrandName());
+    this.sortByRating(true);
   }
 
   addProduct() {
     this.ProductService.addNewProduct = this.p;
+  }
+
+  sortByPrice(type: boolean) {
+    // true - low to hight
+    // false - high to low
+    this.products = type
+      ? this.products.sort((a, b) => a.price - b.price)
+      : this.products.sort((a, b) => b.price - a.price);
+  }
+  sortByRating(type: boolean) {
+    // false - low to hight
+    // true - high to low
+    this.products = type
+      ? this.products.sort((a, b) => b.rating - a.rating)
+      : this.products.sort((a, b) => a.rating - b.rating);
+  }
+  sortByUsage(type: boolean) {
+    // true - outdoor
+    // false - indoor
+    this.products = type
+      ? this.products.filter((i) => i.usage == true)
+      : this.products.filter((i) => i.usage == false);
+  }
+  sortByBrand(name: string) {
+    this.products = this.products.filter((item) => item.brand == name);
   }
 }

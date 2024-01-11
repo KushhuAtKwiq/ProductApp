@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
 
     // if given product id does not exist
     if (!this.currProduct) {
-      console.log('no Product exist!');
+      console.warn('no Product exist!');
       return;
     }
   }

@@ -3,7 +3,7 @@
 <ul>
   <li *ngFor="let product of products">
     <a [routerLink]="[product.id]">show</a>
-    {{ product.name }} -- ${{ product.price }}
+    {{ product.name }} -- ${{ product.price }} -- {{ product.rating }}
   </li>
 </ul>
 

@@ -107,7 +107,7 @@ export class ProductService {
       'Reusable Stainless Steel Bottle',
       24.99,
       'Stay hydrated and reduce waste...',
-      'GreenEarth Products',
+      'SoundWave',
       25,
       true,
       4.8
@@ -125,5 +125,9 @@ export class ProductService {
   public getProduct(productId: number): Product | undefined {
     return this.products.find((item) => item.id == productId);
     // return this.products[1];
+  }
+
+  public getBrandName() {
+    return this.products.map((item) => item.brand);
   }
 }
