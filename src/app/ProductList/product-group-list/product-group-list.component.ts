@@ -5,6 +5,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { ProductService } from '../../Service/product.service';
 import { Product } from '../../model/Product';
 import { FormsModule } from '@angular/forms';
+import { FilterComponent } from '../filter/filter.component';
 
 /**
  * Component shows list of items and loops items of products
@@ -13,7 +14,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-product-group-list',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, ListProductComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    FormsModule,
+    ListProductComponent,
+    FilterComponent,
+  ],
   templateUrl: './product-group-list.component.html',
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
@@ -22,7 +29,7 @@ export class ProductGroupListComponent {
   productsTemp: Product[];
   products: Product[];
   brandName: string[];
-  isFilterActive: boolean = true;
+  isFilterActive: boolean;
 
   // dependency injection
   constructor(private ProductService: ProductService) {
@@ -41,7 +48,7 @@ export class ProductGroupListComponent {
   sortByPrice(type: string) {
     if (type == 'default') return;
 
-    this.isFilterActive = false;
+    this.isFilterActive = true;
     this.products =
       type == 'true'
         ? this.products.sort(
@@ -61,7 +68,7 @@ export class ProductGroupListComponent {
    */
   sortByRating(type: string) {
     if (type == 'default') return;
-    this.isFilterActive = false;
+    this.isFilterActive = true;
     this.products =
       type == 'true'
         ? this.products.sort(
@@ -81,7 +88,7 @@ export class ProductGroupListComponent {
    */
   sortByUsage(type: string) {
     if (type == 'default') return;
-    this.isFilterActive = false;
+    this.isFilterActive = true;
     this.products =
       type == 'true'
         ? this.productsTemp.filter((i) => i.usage == true)
@@ -105,7 +112,7 @@ export class ProductGroupListComponent {
 
   clearFilter() {
     this.products = this.productsTemp;
-    this.isFilterActive = true;
+    this.isFilterActive = false;
     console.log(this.ProductService.getProducts);
   }
 }

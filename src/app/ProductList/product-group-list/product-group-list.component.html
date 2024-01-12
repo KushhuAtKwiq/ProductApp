@@ -1,50 +1,23 @@
 <header></header>
 
 <main>
-  <aside class="filters">
-    <div class="head">
-      <h4>Filter</h4>
-      <button [disabled]="isFilterActive" type="button" (click)="clearFilter()">
-        clear
-      </button>
-    </div>
-    <!-- PRICE FILTER -->
-    <select name="price-filter" #price (change)="sortByPrice(price.value)">
-      <option [value]="'default'">Price</option>
-      <option [value]="false">High to Low</option>
-      <option [value]="true">Low to High</option>
-    </select>
+  <app-filter
+    (sortByPriceEvent)="sortByPrice($event)"
+    (sortByRatingEvent)="sortByRating($event)"
+    (sortByUsageEvent)="sortByUsage($event)"
+    (sortByBrandEvent)="sortByBrand($event)"
+    (clearFilterEvent)="clearFilter()"
+    (isFilterActive)="isFilterActive"
+    [brandNames]="brandName"
+  ></app-filter>
 
-    <!-- RATING FILTER -->
-    <select name="rating-filter" #rating (change)="sortByRating(rating.value)">
-      <option [value]="'default'">Rating</option>
-      <option [value]="true">High to Low</option>
-      <option [value]="false">Low to High</option>
-    </select>
-
-    <!-- RATING FILTER -->
-    <select name="usage-filter" #usage (change)="sortByUsage(usage.value)">
-      <option [value]="'default'">Usage</option>
-      <option [value]="false">Indoor</option>
-      <option [value]="true">Outdoor</option>
-    </select>
-
-    <!-- BRAND FILTER -->
-    <select name="brand-filter" #brand (change)="sortByBrand(brand.value)">
-      <option value="default">Select Brand</option>
-      <option *ngFor="let product of brandName" [value]="product">
-        {{ product }}
-      </option>
-    </select>
-  </aside>
   <section>
     <ul>
       <li
         *ngFor="let product of products; let even = even; let odd = odd"
         [ngClass]="{ odd: odd, even: even }"
       >
-        <a [routerLink]="[product.id]">show</a>
-        {{ product.name }} -- ${{ product.price }} -- {{ product.rating }}
+        <app-list-product [product]="product"></app-list-product>
       </li>
     </ul>
   </section>

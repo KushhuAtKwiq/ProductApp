@@ -1,0 +1,36 @@
+<aside class="filters">
+  <div class="head">
+    <h4>Filter</h4>
+    <button [disabled]="!isFilterActive" type="button" (click)="clearFilter()">
+      clear
+    </button>
+  </div>
+  <!-- PRICE FILTER -->
+  <select name="price-filter" #price (change)="sortPrice(price.value)">
+    <option [value]="'default'">Price</option>
+    <option [value]="false">High to Low</option>
+    <option [value]="true">Low to High</option>
+  </select>
+
+  <!-- RATING FILTER -->
+  <select name="rating-filter" #rating (change)="sortRating(rating.value)">
+    <option [value]="'default'">Rating</option>
+    <option [value]="true">High to Low</option>
+    <option [value]="false">Low to High</option>
+  </select>
+
+  <!-- RATING FILTER -->
+  <select name="usage-filter" #usage (change)="sortUsage(usage.value)">
+    <option [value]="'default'">Usage</option>
+    <option [value]="false">Indoor</option>
+    <option [value]="true">Outdoor</option>
+  </select>
+
+  <!-- BRAND FILTER -->
+  <select name="brand-filter" #brand (change)="sortBrand(brand.value)">
+    <option value="default">Select Brand</option>
+    <option *ngFor="let product of brandNames" [value]="product">
+      {{ product }}
+    </option>
+  </select>
+</aside>
