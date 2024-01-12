@@ -122,6 +122,11 @@ export class ProductService {
     this.products.push(product);
   }
 
+  // returns all the Brand Name
+  public get getBrandNames(): string[] {
+    return Array.from(new Set(this.products.map((item) => item.brand)));
+  }
+
   /**
    * Searches for a specific product in array
    * @param productId
@@ -130,10 +135,5 @@ export class ProductService {
   public getProduct(productId: number): Product | undefined {
     return this.products.find((item) => item.id == productId);
     // return this.products[1];
-  }
-
-  // returns all the Brand Name
-  public get getBrandNames(): string[] {
-    return this.products.map((item) => item.brand);
   }
 }

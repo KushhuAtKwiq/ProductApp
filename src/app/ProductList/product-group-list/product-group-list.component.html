@@ -2,15 +2,34 @@
 
 <main>
   <aside class="filters">
-    <button type="button" (click)="changePrice()">
-      Price: <span>Low to High</span>
-    </button>
-    <button type="button">
-      Rating:
-      <span  (click)="sortByRating(true)">High to Low</span>
-      <span  (click)="sortByRating(false)">Low to High</span>
-    </button>
-    <button type="button" id="">Usage :<span>Indoor</span></button>
+    <div class="head">
+      <h4>Filter</h4>
+      <button [disabled]="isFilterActive" type="button" (click)="clearFilter()">
+        clear
+      </button>
+    </div>
+    <!-- PRICE FILTER -->
+    <select name="price-filter" #price (change)="sortByPrice(price.value)">
+      <option [value]="'default'">Price</option>
+      <option [value]="false">High to Low</option>
+      <option [value]="true">Low to High</option>
+    </select>
+
+    <!-- RATING FILTER -->
+    <select name="rating-filter" #rating (change)="sortByRating(rating.value)">
+      <option [value]="'default'">Rating</option>
+      <option [value]="true">High to Low</option>
+      <option [value]="false">Low to High</option>
+    </select>
+
+    <!-- RATING FILTER -->
+    <select name="usage-filter" #usage (change)="sortByUsage(usage.value)">
+      <option [value]="'default'">Usage</option>
+      <option [value]="false">Indoor</option>
+      <option [value]="true">Outdoor</option>
+    </select>
+
+    <!-- BRAND FILTER -->
     <select name="brand-filter" #brand (change)="sortByBrand(brand.value)">
       <option value="default">Select Brand</option>
       <option *ngFor="let product of brandName" [value]="product">
@@ -20,10 +39,12 @@
   </aside>
   <section>
     <ul>
-      <li *ngFor="let product of productsItrator">
+      <li
+        *ngFor="let product of products; let even = even; let odd = odd"
+        [ngClass]="{ odd: odd, even: even }"
+      >
         <a [routerLink]="[product.id]">show</a>
         {{ product.name }} -- ${{ product.price }} -- {{ product.rating }}
-        <hr />
       </li>
     </ul>
   </section>

@@ -20,8 +20,7 @@ select {
   border: none;
   height: fit-content;
 }
-.filters > button,
-select {
+.filters > select {
   width: 200px;
   font-weight: 700;
   align-self: center;
@@ -66,4 +65,15 @@ select {
 
 select > option {
   padding: 0.75rem;
+}
+
+.filters .head {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.odd{
+  background-color: rgba(0, 0, 0, 0.1);
 }

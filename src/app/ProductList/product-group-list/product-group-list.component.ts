@@ -4,6 +4,7 @@ import { ListProductComponent } from '../list-product/list-product.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ProductService } from '../../Service/product.service';
 import { Product } from '../../model/Product';
+import { FormsModule } from '@angular/forms';
 
 /**
  * Component shows list of items and loops items of products
@@ -12,21 +13,22 @@ import { Product } from '../../model/Product';
 @Component({
   selector: 'app-product-group-list',
   standalone: true,
-  imports: [RouterModule, CommonModule, ListProductComponent],
+  imports: [RouterModule, CommonModule, FormsModule, ListProductComponent],
   templateUrl: './product-group-list.component.html',
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
 })
 export class ProductGroupListComponent {
-  productsItrator: Product[];
+  productsTemp: Product[];
   products: Product[];
   brandName: string[];
+  isFilterActive: boolean = true;
 
   // dependency injection
   constructor(private ProductService: ProductService) {
     // using getter to load all data
-    this.productsItrator = this.products = this.ProductService.getProducts;
-    this.brandName = Array.from(new Set(ProductService.getBrandNames));
+    this.productsTemp = this.products = this.ProductService.getProducts;
+    this.brandName = ProductService.getBrandNames;
   }
 
   /**
@@ -36,14 +38,18 @@ export class ProductGroupListComponent {
    * false - low to hight
    * true - high to low
    */
-  sortByPrice(type: boolean) {
-    this.productsItrator = type
-      ? this.products.sort(
-          (productA, productB) => productA.price - productB.price
-        )
-      : this.products.sort(
-          (productA, productB) => productB.price - productA.price
-        );
+  sortByPrice(type: string) {
+    if (type == 'default') return;
+
+    this.isFilterActive = false;
+    this.products =
+      type == 'true'
+        ? this.products.sort(
+            (productA, productB) => productA.price - productB.price
+          )
+        : this.products.sort(
+            (productA, productB) => productB.price - productA.price
+          );
   }
 
   /**
@@ -53,14 +59,17 @@ export class ProductGroupListComponent {
    * false - low to hight
    * true - high to low
    */
-  sortByRating(type: boolean) {
-    this.productsItrator = type
-      ? this.products.sort(
-          (productA, productB) => productB.rating - productA.rating
-        )
-      : this.products.sort(
-          (productA, productB) => productA.rating - productB.rating
-        );
+  sortByRating(type: string) {
+    if (type == 'default') return;
+    this.isFilterActive = false;
+    this.products =
+      type == 'true'
+        ? this.products.sort(
+            (productA, productB) => productB.rating - productA.rating
+          )
+        : this.products.sort(
+            (productA, productB) => productA.rating - productB.rating
+          );
   }
 
   /**
@@ -70,19 +79,33 @@ export class ProductGroupListComponent {
    * true - outdoor
    * false - indoor
    */
-  sortByUsage(type: boolean) {
-    this.productsItrator = type
-      ? this.products.filter((i) => i.usage == true)
-      : this.products.filter((i) => i.usage == false);
+  sortByUsage(type: string) {
+    if (type == 'default') return;
+    this.isFilterActive = false;
+    this.products =
+      type == 'true'
+        ? this.productsTemp.filter((i) => i.usage == true)
+        : this.productsTemp.filter((i) => i.usage == false);
   }
 
   sortByBrand(name: string) {
-    if (name == 'default') {
-      this.productsItrator = this.products;
-      return;
-    }
-    this.productsItrator = this.products.filter((item) => item.brand == name);
+    if (name == 'default') return;
+
+    this.products = this.products.filter((item) => item.brand == name);
   }
 
-  changePrice() {}
+  checkDefault(name: string): boolean {
+    if (name != 'default') return false;
+
+    this.products = this.productsTemp;
+
+    console.log(name);
+    return true;
+  }
+
+  clearFilter() {
+    this.products = this.productsTemp;
+    this.isFilterActive = true;
+    console.log(this.ProductService.getProducts);
+  }
 }
