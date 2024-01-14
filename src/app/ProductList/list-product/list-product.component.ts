@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Product } from '../../model/Product';
 
 @Component({
-  selector: 'app-list-product',
+  selector: 'list-product',
   standalone: true,
   imports: [RouterModule],
   templateUrl: './list-product.component.html',

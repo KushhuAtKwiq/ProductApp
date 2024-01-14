@@ -11,8 +11,12 @@ import { FilterComponent } from '../filter/filter.component';
  * Component shows list of items and loops items of products
  */
 
+interface type {
+  sortByRating(type: string | boolean): void;
+}
+
 @Component({
-  selector: 'app-product-group-list',
+  selector: 'product-group-list',
   standalone: true,
   imports: [
     RouterModule,
@@ -25,7 +29,7 @@ import { FilterComponent } from '../filter/filter.component';
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
 })
-export class ProductGroupListComponent {
+export class ProductGroupListComponent implements type {
   productsTemp: Product[];
   products: Product[];
   brandName: string[];
@@ -45,38 +49,36 @@ export class ProductGroupListComponent {
    * false - low to hight
    * true - high to low
    */
-  sortByPrice(type: string) {
+  sortByPrice(type: string | boolean) {
     if (type == 'default') return;
 
     this.isFilterActive = true;
-    this.products =
-      type == 'true'
-        ? this.products.sort(
-            (productA, productB) => productA.price - productB.price
-          )
-        : this.products.sort(
-            (productA, productB) => productB.price - productA.price
-          );
+    this.products = type
+      ? this.products.sort(
+          (productA, productB) => productA.price - productB.price
+        )
+      : this.products.sort(
+          (productA, productB) => productB.price - productA.price
+        );
   }
 
   /**
    * Sorts by Product Rating
    *
    * @param type
-   * false - low to hight
-   * true - high to low
+   *  false - low to high
+   *  true - high to low
    */
-  sortByRating(type: string) {
+  sortByRating(type: string | boolean) {
     if (type == 'default') return;
     this.isFilterActive = true;
-    this.products =
-      type == 'true'
-        ? this.products.sort(
-            (productA, productB) => productB.rating - productA.rating
-          )
-        : this.products.sort(
-            (productA, productB) => productA.rating - productB.rating
-          );
+    this.products = type
+      ? this.products.sort(
+          (productA, productB) => productB.rating - productA.rating
+        )
+      : this.products.sort(
+          (productA, productB) => productA.rating - productB.rating
+        );
   }
 
   /**
@@ -86,13 +88,12 @@ export class ProductGroupListComponent {
    * true - outdoor
    * false - indoor
    */
-  sortByUsage(type: string) {
+  sortByUsage(type: string | boolean) {
     if (type == 'default') return;
     this.isFilterActive = true;
-    this.products =
-      type == 'true'
-        ? this.productsTemp.filter((i) => i.usage == true)
-        : this.productsTemp.filter((i) => i.usage == false);
+    this.products = type
+      ? this.productsTemp.filter((i) => i.usage == true)
+      : this.productsTemp.filter((i) => i.usage == false);
   }
 
   sortByBrand(name: string) {
@@ -113,6 +114,5 @@ export class ProductGroupListComponent {
   clearFilter() {
     this.products = this.productsTemp;
     this.isFilterActive = false;
-    console.log(this.ProductService.getProducts);
   }
 }

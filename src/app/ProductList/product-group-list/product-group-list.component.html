@@ -1,25 +1,28 @@
 <header></header>
 
 <main>
-  <app-filter
+  <filter
     (sortByPriceEvent)="sortByPrice($event)"
     (sortByRatingEvent)="sortByRating($event)"
     (sortByUsageEvent)="sortByUsage($event)"
     (sortByBrandEvent)="sortByBrand($event)"
     (clearFilterEvent)="clearFilter()"
-    (isFilterActive)="isFilterActive"
+    [isFilterActive]="isFilterActive"
     [brandNames]="brandName"
-  ></app-filter>
+  ></filter>
 
   <section>
-    <ul>
-      <li
-        *ngFor="let product of products; let even = even; let odd = odd"
-        [ngClass]="{ odd: odd, even: even }"
-      >
-        <app-list-product [product]="product"></app-list-product>
-      </li>
-    </ul>
+    <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
+    <ng-template #showProduct>
+      <ul>
+        <li
+          *ngFor="let product of products; let even = even; let odd = odd"
+          [ngClass]="{ odd: odd, even: even }"
+        >
+          <list-product [product]="product"></list-product>
+        </li>
+      </ul>
+    </ng-template>
   </section>
 </main>
 

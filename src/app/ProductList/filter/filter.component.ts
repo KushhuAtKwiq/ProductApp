@@ -1,36 +1,63 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChange,
+  SimpleChanges,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-filter',
+  selector: 'filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css',
 })
-export class FilterComponent {
-  @Output() sortByPriceEvent = new EventEmitter<string>();
-  @Output() sortByRatingEvent = new EventEmitter<string>();
-  @Output() sortByUsageEvent = new EventEmitter<string>();
+export class FilterComponent implements OnChanges {
+  @Output() sortByPriceEvent = new EventEmitter<string | boolean>();
+  @Output() sortByRatingEvent = new EventEmitter<string | boolean>();
+  @Output() sortByUsageEvent = new EventEmitter<string | boolean>();
   @Output() sortByBrandEvent = new EventEmitter<string>();
-  @Output() clearFilterEvent = new EventEmitter<string>();
+  @Output() clearFilterEvent = new EventEmitter();
 
   @Input() brandNames: Array<string>;
   @Input() isFilterActive: boolean;
 
-  sortPrice(type: string) {
-    this.sortByPriceEvent.emit(type);
+  filter = {
+    price: 'default',
+    rating: 'default',
+    usage: 'default',
+    brand: 'default',
+  };
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.filter);
   }
-  sortRating(type: string) {
-    this.sortByRatingEvent.emit(type);
+
+  sortPrice() {
+    this.sortByPriceEvent.emit(this.filter.price);
   }
-  sortUsage(type: string) {
-    this.sortByUsageEvent.emit(type);
+  sortRating() {
+    this.sortByRatingEvent.emit(this.filter.rating);
   }
-  sortBrand(name: string) {
-    this.sortByBrandEvent.emit(name);
+  sortUsage() {
+    this.sortByUsageEvent.emit(this.filter.usage);
+  }
+  sortBrand() {
+    this.sortByBrandEvent.emit(this.filter.brand);
   }
   clearFilter() {
+    this.filter = {
+      price: 'default',
+      rating: 'default',
+      usage: 'default',
+      brand: 'default',
+    };
     this.clearFilterEvent.emit();
   }
 }
