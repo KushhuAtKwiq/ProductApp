@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListProductComponent } from '../list-product/list-product.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -26,11 +26,12 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
 })
-export class ProductGroupListComponent {
+export class ProductGroupListComponent implements OnInit {
   productsTemp: Product[];
   products: Product[];
   brandName: string[];
   isFilterActive: boolean;
+  ProductData: Object[] = [];
 
   private baseUrl = 'https://jsonplaceholder.typicode.com/comments';
 
@@ -42,11 +43,15 @@ export class ProductGroupListComponent {
     private http: HttpClient
   ) {
     // using getter to load all data
-    // this.productsTemp = this.products = this.ProductService.getProducts;
-    // this.brandName = ProductService.getBrandNames;
+    this.productsTemp = this.products = this.ProductService.getProducts;
+    this.brandName = ProductService.getBrandNames;
+  }
+
+  ngOnInit(): void {
     this.http
       .get(this.baseUrl)
-      .subscribe((data) => (ProductService.addNewProduct = data));
+      .subscribe((data) => this.ProductData.push(data));
+    console.log(this.ProductData);
   }
   /**
    * Sorts by Product Price
