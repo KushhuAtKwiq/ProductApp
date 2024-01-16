@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
 import { Product } from '../../../model/Product';
 import { ProductService } from '../../../Service/product.service';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Component shows list of items and loops items of products
@@ -31,13 +32,22 @@ export class ProductGroupListComponent {
   brandName: string[];
   isFilterActive: boolean;
 
-  // dependency injection
-  constructor(private ProductService: ProductService) {
-    // using getter to load all data
-    this.productsTemp = this.products = this.ProductService.getProducts;
-    this.brandName = ProductService.getBrandNames;
-  }
+  private baseUrl = 'https://jsonplaceholder.typicode.com/comments';
 
+  comments: any = [];
+
+  // dependency injection
+  constructor(
+    private ProductService: ProductService,
+    private http: HttpClient
+  ) {
+    // using getter to load all data
+    // this.productsTemp = this.products = this.ProductService.getProducts;
+    // this.brandName = ProductService.getBrandNames;
+    this.http
+      .get(this.baseUrl)
+      .subscribe((data) => (ProductService.addNewProduct = data));
+  }
   /**
    * Sorts by Product Price
    *
