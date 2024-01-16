@@ -2,18 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ListProductComponent } from '../list-product/list-product.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ProductService } from '../../Service/product.service';
-import { Product } from '../../model/Product';
 import { FormsModule } from '@angular/forms';
 import { FilterComponent } from '../filter/filter.component';
+import { Product } from '../../../model/Product';
+import { ProductService } from '../../../Service/product.service';
 
 /**
  * Component shows list of items and loops items of products
  */
-
-interface type {
-  sortByRating(type: string | boolean): void;
-}
 
 @Component({
   selector: 'product-group-list',
@@ -29,7 +25,7 @@ interface type {
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
 })
-export class ProductGroupListComponent implements type {
+export class ProductGroupListComponent {
   productsTemp: Product[];
   products: Product[];
   brandName: string[];
@@ -92,8 +88,8 @@ export class ProductGroupListComponent implements type {
     if (type == 'default') return;
     this.isFilterActive = true;
     this.products = type
-      ? this.productsTemp.filter((i) => i.usage == true)
-      : this.productsTemp.filter((i) => i.usage == false);
+      ? this.productsTemp.filter((product) => product.usage == true)
+      : this.productsTemp.filter((product) => product.usage == false);
   }
 
   sortByBrand(name: string) {

@@ -8,9 +8,15 @@ ul,
 li {
   list-style: none;
 }
-a,button {
+a,
+button {
   all: unset;
 }
-a:hover,button:hover {
+a:hover,
+button:hover {
   cursor: pointer;
+}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }

@@ -73,7 +73,10 @@ select > option {
   justify-content: space-between;
 }
 
+ul {
+  padding: 5rem 0;
+}
 
-.odd{
-  background-color: rgba(0, 0, 0, 0.1);
+ul li {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }

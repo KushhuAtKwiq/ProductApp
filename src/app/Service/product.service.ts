@@ -122,7 +122,10 @@ export class ProductService {
     this.products.push(product);
   }
 
-  // returns all the Brand Name
+  /**
+   returns all the Brand Name
+   * 
+    */
   public get getBrandNames(): string[] {
     return Array.from(new Set(this.products.map((item) => item.brand)));
   }

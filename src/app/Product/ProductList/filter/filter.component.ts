@@ -41,9 +41,11 @@ export class FilterComponent implements OnChanges {
 
   sortPrice() {
     this.sortByPriceEvent.emit(this.filter.price);
+    this.filter.rating = 'default';
   }
   sortRating() {
     this.sortByRatingEvent.emit(this.filter.rating);
+    this.filter.price = 'default';
   }
   sortUsage() {
     this.sortByUsageEvent.emit(this.filter.usage);
