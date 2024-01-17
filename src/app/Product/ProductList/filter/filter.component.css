@@ -131,16 +131,23 @@ option:disabled {
 
 .price {
   border-radius: 50px;
+  width: 139px;
+  text-align: center;
 }
 
 .rating {
   border-radius: 50px;
+  width: 139px;
+  text-align: center;
 }
 
 .usage {
   border-radius: 50px;
+  width: 100px;
+  text-align: center;
 }
 
 .brand {
   border-radius: 50px;
+  text-align: center;
 }

@@ -1,14 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.css',
 })
-export class FilterComponent implements OnChanges {
+export class FilterComponent {
   @Output() sortByPriceEvent = new EventEmitter<string | boolean>();
   @Output() sortByRatingEvent = new EventEmitter<string | boolean>();
   @Output() sortByUsageEvent = new EventEmitter<string | boolean>();
@@ -34,10 +25,6 @@ export class FilterComponent implements OnChanges {
     usage: 'default',
     brand: 'default',
   };
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.filter);
-  }
 
   sortPrice() {
     this.sortByPriceEvent.emit(this.filter.price);

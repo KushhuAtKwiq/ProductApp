@@ -18,13 +18,16 @@ export class ProductComponent implements OnInit {
   constructor(
     private ProductService: ProductService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    setTimeout(() => {
+      console.log(this.ProductService.ProductData[0]);
+    }, 1000);
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const ID = params['id'];
+      const ID: number = params['id'];
       this.currProduct = this.ProductService.getProduct(ID);
-      console.log(ID);
     });
 
     // if given product id does not exist

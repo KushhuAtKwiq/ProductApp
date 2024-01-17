@@ -15,20 +15,9 @@
       [brandNames]="brandName"
     >
     </filter>
-
-    <!-- <div class="dropdown">
-      <button>filters</button>
-      <div class="dropdown-content">
-        <a href="#">Option 1</a>
-        <a href="#">Option 2</a>
-        <a href="#">Option 3</a>
-      </div>
-    </div> -->
   </nav>
 </header>
-
 <main>
-  {{ ProductData | json }}
   <section>
     <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
     <ng-template #showProduct>
@@ -42,39 +31,37 @@
       </ul>
     </ng-template>
   </section>
-  <footer class="site-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h4>Contact Us</h4>
-          <p></p>
-        </div>
-        <div class="col-md-4">
-          <h4>Quick Links</h4>
-          <ul class="list-unstyled">
-            <a href="#">Home</a>
-            <br />
-            <a href="#">About Us</a>
-            <br />
-            <a href="#">Contact Us</a>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h4>Stay Connected</h4>
-          <p>
-            Follow us on social media for the latest updates and promotions.
-          </p>
-        </div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Contact Us</h4>
+        <p></p>
       </div>
-      <hr />
-
-      <div class="row">
-        <div class="col-md-12">
-          <p class="text-center">
-            &copy; 2024 Your E-Commerce Store. All rights reserved.
-          </p>
-        </div>
+      <div class="col-md-4">
+        <h4>Quick Links</h4>
+        <ul class="list-unstyled">
+          <a href="#">Home</a>
+          <br />
+          <a href="#">About Us</a>
+          <br />
+          <a href="#">Contact Us</a>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4>Stay Connected</h4>
+        <p>Follow us on social media for the latest updates and promotions.</p>
       </div>
     </div>
-  </footer>
-</main>
+    <hr />
+
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center">
+          &copy; 2024 Your E-Commerce Store. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

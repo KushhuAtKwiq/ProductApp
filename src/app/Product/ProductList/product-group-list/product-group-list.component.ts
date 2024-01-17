@@ -45,20 +45,20 @@ export class ProductGroupListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ProductService.get.subscribe((data) => (this.ProductData = data));
-    console.log(this.ProductData);
-    this.ProductData.map((data: any) => {
-      this.ProductService.addNewProduct = new Product().add(
-        data.id,
-        data.name,
-        data.price,
-        data.description,
-        data.brand,
-        data.quantity,
-        data.usage,
-        data.rating
-      );
-    });
+    // this.ProductService.get.subscribe((data) => (this.ProductData = data));
+    // console.log(this.ProductData);
+    // this.ProductData.map((data: any) => {
+    //   this.ProductService.addNewProduct = new Product().add(
+    //     data.id,
+    //     data.name,
+    //     data.price,
+    //     data.description,
+    //     data.brand,
+    //     data.quantity,
+    //     data.usage,
+    //     data.rating
+    //   );
+    // });
   }
   /**
    * Sorts by Product Price
@@ -69,6 +69,8 @@ export class ProductGroupListComponent implements OnInit {
    */
   sortByPrice(type: string | boolean) {
     if (type == 'default') return;
+
+    console.log(this.ProductService.ProductData);
 
     this.isFilterActive = true;
     this.products = type
