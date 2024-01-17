@@ -1,6 +1,23 @@
 <h1 *ngIf="!currProduct; else showProduct">No Product Exist</h1>
 
 <ng-template #showProduct>
-  <h1>{{ currProduct?.id }}</h1>
-  <h2>{{ currProduct?.name }}</h2>
+  <main>
+    <img src="" alt="" />
+    <aside class="center">
+      <p>id:{{ currProduct?.id }}</p>
+      <h1>{{ currProduct?.name }}</h1>
+      <p>{{ currProduct?.description }}</p>
+      <p>⭐⭐⭐{{ currProduct?.rating }}</p>
+      <p>Price: ${{ currProduct?.price }}</p>
+      <p>
+        It can be used <b *ngIf="currProduct?.usage">Indoor</b>
+        <b *ngIf="!currProduct?.usage">Outdoor</b>
+      </p>
+      <p>
+        Brand:
+        <b> {{ currProduct?.brand }}</b>
+      </p>
+      <p>{{ currProduct?.quantity }} items available</p>
+    </aside>
+  </main>
 </ng-template>

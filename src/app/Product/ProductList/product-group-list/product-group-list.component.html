@@ -15,6 +15,7 @@
     <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
     <ng-template #showProduct>
       <ul>
+        <p>{{products.length}} products found</p>
         <li
           *ngFor="let product of products; let even = even; let odd = odd"
           [ngClass]="{ odd: odd, even: even }"
