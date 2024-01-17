@@ -19,16 +19,19 @@
 </header>
 <main>
   <section>
-    <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
-    <ng-template #showProduct>
-      <ul>
-        <li
-          *ngFor="let product of products; let even = even; let odd = odd"
-          [ngClass]="{ odd: odd, even: even }"
-        >
-          <list-product [product]="product"></list-product>
-        </li>
-      </ul>
+    <h3 *ngIf="data.isLoading; else gotData">loading...</h3>
+    <ng-template #gotData>
+      <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
+      <ng-template #showProduct>
+        <ul>
+          <li
+            *ngFor="let product of products; let even = even; let odd = odd"
+            [ngClass]="{ odd: odd, even: even }"
+          >
+            <list-product [product]="product"></list-product>
+          </li>
+        </ul>
+      </ng-template>
     </ng-template>
   </section>
 </main>

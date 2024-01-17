@@ -7,6 +7,7 @@ import { FilterComponent } from '../filter/filter.component';
 import { Product } from '../../../model/Product';
 import { ProductService } from '../../../Service/product.service';
 import { HttpClient } from '@angular/common/http';
+import { Perform } from '../../../model/perform.class';
 
 /**
  * Component shows list of items and loops items of products
@@ -32,6 +33,7 @@ export class ProductGroupListComponent implements OnInit {
   brandName: string[];
   isFilterActive: boolean;
   ProductData: Object[] = [];
+  data = new Perform<Product[]>();
 
   private baseUrl = 'http://localhost:3000/product';
 
@@ -45,20 +47,30 @@ export class ProductGroupListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.data.load(this.ProductService.get);
+    // if (this.data.products)
+    //   this.ProductService.addNewProduct = this.data.products[0];
+    // console.log(this.ProductService.getProducts);
+
+    setTimeout(() => {
+      if (this.data.products)
+        this.data.products.map((data: any) => {
+          this.ProductService.addNewProduct = new Product().add(
+            data.id,
+            data.name,
+            data.price,
+            data.description,
+            data.brand,
+            data.quantity,
+            data.usage,
+            data.rating
+          );
+        });
+      console.log(this.ProductService.getProducts);
+    }, 500);
+
     // this.ProductService.get.subscribe((data) => (this.ProductData = data));
     // console.log(this.ProductData);
-    // this.ProductData.map((data: any) => {
-    //   this.ProductService.addNewProduct = new Product().add(
-    //     data.id,
-    //     data.name,
-    //     data.price,
-    //     data.description,
-    //     data.brand,
-    //     data.quantity,
-    //     data.usage,
-    //     data.rating
-    //   );
-    // });
   }
   /**
    * Sorts by Product Price
@@ -69,8 +81,7 @@ export class ProductGroupListComponent implements OnInit {
    */
   sortByPrice(type: string | boolean) {
     if (type == 'default') return;
-
-    console.log(this.ProductService.ProductData);
+    if (!this.data.isLoading) console.log(this.data.products);
 
     this.isFilterActive = true;
     this.products = type

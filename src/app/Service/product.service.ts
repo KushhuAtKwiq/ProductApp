@@ -6,7 +6,7 @@ import { Product } from '../model/Product';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService implements OnInit {
+export class ProductService {
   products: Product[] = [
     new Product().add(
       10293,
@@ -120,22 +120,16 @@ export class ProductService implements OnInit {
     ),
   ];
   private baseUrl = 'https://jsonplaceholder.typicode.com/comments';
+  
   ProductData: Product[];
 
-  constructor(private http: HttpClient) {
-    this.http
-      .get<Product[]>(this.baseUrl)
-      .subscribe((data) => (this.ProductData = data));
-    console.log(this.ProductData);
-  }
+  constructor(private http: HttpClient) {}
 
-  public get getProducts(): Product[] {
-    return this.products;
-  }
-
-  ngOnInit(): void {}
   public get get(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl);
+  }
+  public get getProducts(): Product[] {
+    return this.products;
   }
 
   public set addNewProduct(product: Product) {

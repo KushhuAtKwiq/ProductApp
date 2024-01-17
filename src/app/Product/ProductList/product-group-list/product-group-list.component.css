@@ -91,6 +91,9 @@ main {
   display: grid;
   grid-template-columns: 1fr;
   place-items: center;
+  align-items: start;
+  min-height: 100vh;
+  padding: 3rem 0;
 }
 
 aside {
