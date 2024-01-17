@@ -1,4 +1,25 @@
-<form [formGroup]="productForm">
-  <label for="name">Product Name: </label>
-  <input type="text" id="name" formControlName="name" />
-</form>
+<div class="form-container">
+  <form [formGroup]="productForm">
+    <h1>ADD PRODUCTS</h1>
+    <BR />
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" formControlName="name" />
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" formControlName="price" />
+
+    <label for="description">Product Description:</label>
+    <input type="text" id="description" formControlName="Description" />
+
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" formControlName="brand" />
+
+    <label for="quantity">Quantity:</label>
+    <input type="text" id="quantity" formControlName="Quantity" />
+
+    <label for="usage">Usage:</label>
+    <input type="text" id="usage" formControlName="usage" />
+
+    <button type="submit">Submit</button>
+  </form>
+</div>

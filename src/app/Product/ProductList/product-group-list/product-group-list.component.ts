@@ -33,25 +33,32 @@ export class ProductGroupListComponent implements OnInit {
   isFilterActive: boolean;
   ProductData: Object[] = [];
 
-  private baseUrl = 'https://jsonplaceholder.typicode.com/comments';
+  private baseUrl = 'http://localhost:3000/product';
 
   comments: any = [];
 
   // dependency injection
-  constructor(
-    private ProductService: ProductService,
-    private http: HttpClient
-  ) {
+  constructor(private ProductService: ProductService) {
     // using getter to load all data
     this.productsTemp = this.products = this.ProductService.getProducts;
     this.brandName = ProductService.getBrandNames;
   }
 
   ngOnInit(): void {
-    this.http
-      .get(this.baseUrl)
-      .subscribe((data) => this.ProductData.push(data));
+    this.ProductService.get.subscribe((data) => (this.ProductData = data));
     console.log(this.ProductData);
+    this.ProductData.map((data: any) => {
+      this.ProductService.addNewProduct = new Product().add(
+        data.id,
+        data.name,
+        data.price,
+        data.description,
+        data.brand,
+        data.quantity,
+        data.usage,
+        data.rating
+      );
+    });
   }
   /**
    * Sorts by Product Price
@@ -110,6 +117,7 @@ export class ProductGroupListComponent implements OnInit {
   sortByBrand(name: string) {
     if (name == 'default') return;
 
+    this.isFilterActive = true;
     this.products = this.products.filter((item) => item.brand == name);
   }
 

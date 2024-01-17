@@ -8,12 +8,12 @@ nav {
 }
 
 .logo {
-  width: 50px; /* Adjust the width as needed */
-  height: auto; /* Maintains aspect ratio */
+  width: auto;
+  height: auto;
 }
 
 .menu-icon {
-  display: none; /* Hide by default for larger screens */
+  display: none;
   cursor: pointer;
 }
 
@@ -166,4 +166,53 @@ ul {
 
 ul li {
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer {
+  background-color: #41403e;
+  padding: 30px 0;
+  color: white;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-4 {
+  width: 33.3333%;
+  padding: 0 15px;
+}
+
+h4 {
+  color: #007bff;
+}
+
+ul.list-unstyled {
+  list-style: none;
+  padding: 0;
+}
+
+ul.list-inline li {
+  margin-right: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+hr {
+  border-top: 1px solid #dee2e6;
 }
