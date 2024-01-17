@@ -1,21 +1,40 @@
-<header></header>
+<header>
+  <nav>
+    <div class="logo">
+      <img src="" alt="" />
+    </div>
+
+    <div class="search-bar">
+      <input type="text" class="search" placeholder="Search..." />
+    </div>
+    <filter
+      (sortByPriceEvent)="sortByPrice($event)"
+      (sortByRatingEvent)="sortByRating($event)"
+      (sortByUsageEvent)="sortByUsage($event)"
+      (sortByBrandEvent)="sortByBrand($event)"
+      (clearFilterEvent)="clearFilter()"
+      [isFilterActive]="isFilterActive"
+      [brandNames]="brandName"
+    >
+    </filter>
+
+    <!-- <div class="dropdown">
+      <button>filters</button>
+      <div class="dropdown-content">
+        <a href="#">Option 1</a>
+        <a href="#">Option 2</a>
+        <a href="#">Option 3</a>
+      </div>
+    </div> -->
+  </nav>
+</header>
 
 <main>
-  <filter
-    (sortByPriceEvent)="sortByPrice($event)"
-    (sortByRatingEvent)="sortByRating($event)"
-    (sortByUsageEvent)="sortByUsage($event)"
-    (sortByBrandEvent)="sortByBrand($event)"
-    (clearFilterEvent)="clearFilter()"
-    [isFilterActive]="isFilterActive"
-    [brandNames]="brandName"
-  ></filter>
-
+  <!-- {{ProductData|json}} -->
   <section>
     <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
     <ng-template #showProduct>
       <ul>
-        <p>{{products.length}} products found</p>
         <li
           *ngFor="let product of products; let even = even; let odd = odd"
           [ngClass]="{ odd: odd, even: even }"
