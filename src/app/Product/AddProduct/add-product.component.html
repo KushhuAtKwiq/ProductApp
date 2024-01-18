@@ -3,24 +3,44 @@
     <h1>ADD PRODUCTS</h1>
     <BR />
     <label for="name">Product Name:</label>
-    <input type="text" id="name" formControlName="name" />
+    <input type="text" id="name" formControlName="Name" />
 
     <label for="price">Price:</label>
-    <input type="text" id="price" formControlName="price" />
+    <input type="text" id="price" formControlName="Price" />
 
     <label for="description">Product Description:</label>
-    <input type="text" id="description" formControlName="description" />
+    <textarea cols="52.5" rows="5"
+      id="description"
+      formControlName="Description"
+    ></textarea>
 
     <label for="brand">Brand:</label>
-    <input type="text" id="brand" formControlName="brand" />
+    <input type="text" id="brand" formControlName="Brand" />
 
     <label for="quantity">Quantity:</label>
-    <input type="text" id="quantity" formControlName="quantity" />
+    <input type="text" id="quantity" formControlName="Quantity" />
 
-    <label for="usage">Usage:</label>
-    <input type="text" id="usage" formControlName="usage" />
+    <div class="radio-group">
+      <label for="indoor">Indoor</label>
+      <input
+        type="radio"
+        id="indoor"
+        name="Usage"
+        [value]="false"
+        formControlName="Usage"
+      />
 
-    <input type="submit" value="Submit" (click)="submitForm()">
-    <input type="button" value="Clear" (click)="clearForm()">
+      <label for="outdoor">Outdoor</label>
+      <input
+        type="radio"
+        id="outdoor"
+        name="Usage"
+        [value]="true"
+        formControlName="Usage"
+      />
+    </div>
+
+    <input type="submit" value="Submit" (click)="submitForm()" />
+    <input type="button" value="Clear" (click)="clearForm()" />
   </form>
 </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../../Service/product.service';
 import { Product } from '../../../model/Product';
+import { Perform } from '../../../model/perform.class';
 
 @Component({
   selector: 'app-product',
@@ -13,30 +14,43 @@ import { Product } from '../../../model/Product';
   providers: [ProductService],
 })
 export class ProductComponent implements OnInit {
-  currProduct: Product | undefined;
+  data = new Perform<any>();
+  currProduct: Product;
 
   constructor(
     private ProductService: ProductService,
     private route: ActivatedRoute
-  ) {
-    setTimeout(() => {
-      console.log(this.ProductService.ProductData[0]);
-    }, 1000);
-  }
+  ) {}
 
   ngOnInit() {
-    setTimeout(() => {
-      this.route.params.subscribe((params) => {
-        const ID: number = params['id'];
-        this.currProduct = this.ProductService.getProduct(ID);
-      });
-      console.log(this.ProductService.getProducts);
+    var id: number;
+    this.route.params.subscribe((params) => {
+      id = params['id'];
+      this.data.load(this.ProductService.getProduct(id));
+    });
 
-      // if given product id does not exist
-      if (!this.currProduct) {
+    // if given product id does not exist
+    setTimeout(() => {
+      if (!this.data.products) {
         console.warn('no Product exist!');
         return;
       }
-    }, 500);
+      console.log(this.data.products);
+      if (this.data.products)
+        this.currProduct = new Product().add(
+          this.data.products.id,
+          this.data.products.name,
+          this.data.products.price,
+          this.data.products.description,
+          this.data.products.brand,
+          this.data.products.quantity,
+          this.data.products.usage,
+          this.data.products.rating
+        );
+
+      // console.log(this.currProduct);
+    }, 1000);
   }
+
+  getID() {}
 }

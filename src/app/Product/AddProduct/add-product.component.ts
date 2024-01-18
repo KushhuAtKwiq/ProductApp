@@ -20,35 +20,27 @@ export class AddProductComponent {
   constructor(private ProductService: ProductService) {}
 
   productForm = new FormGroup({
-    name: new FormControl(undefined),
-    price: new FormControl(undefined),
-    description: new FormControl(undefined),
-    brand: new FormControl(undefined),
-    quantity: new FormControl(undefined),
-    usage: new FormControl(undefined),
+    Name: new FormControl(undefined),
+    Price: new FormControl(0),
+    Description: new FormControl(undefined),
+    Brand: new FormControl(undefined),
+    Quantity: new FormControl(0),
+    Usage: new FormControl(true),
+    Rating: new FormControl(0),
   });
 
   submitForm() {
     if (this.productForm.valid) {
       const formData = this.productForm.value;
+      console.log(...[this.productForm.value]);
 
-      this.ProductService.postData(formData)
-        .pipe(
-          catchError((error) => {
-            console.error('Error submitting form data:', error);
-            return of(null);
-          }),
-          finalize(() => {
-            this.clearForm();
-          })
-        )
-        .subscribe((response) => {
-          if (response !== null) {
-            console.log('Data submitted successfully');
-          } else {
-            alert('Error submitting form data. Please try again.');
-          }
-        });
+      this.ProductService.postData(formData).subscribe((response) => {
+        if (response !== null) {
+          alert('Data submitted successfully');
+        } else {
+          alert('Error submitting form data. Please try again.');
+        }
+      });
     } else {
       alert('Provide valid details');
       console.error('Form is not valid');

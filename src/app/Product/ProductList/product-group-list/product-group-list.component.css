@@ -92,7 +92,7 @@ main {
   grid-template-columns: 1fr;
   place-items: center;
   align-items: start;
-  min-height: 100vh;
+  min-height: 80dvh;
   padding: 3rem 0;
 }
 
