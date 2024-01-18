@@ -14,11 +14,15 @@
     >
     </filter>
     <a [routerLink]="['add']">Add Product</a>
+    <button type="button" (click)="showCart()">CART</button>
   </nav>
 </header>
 <main>
   <section>
     <h3 *ngIf="data.isLoading; else gotData">loading...</h3>
+    <!-- <h3  *ngIf="data.isLoading || data.hasError; else gotData">
+      Error Loading Data {{ data.hasError }} -- {{ data.isLoading }}
+    </h3> -->
     <ng-template #gotData>
       <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
       <ng-template #showProduct>
@@ -27,7 +31,10 @@
             *ngFor="let product of products; let even = even; let odd = odd"
             [ngClass]="{ odd: odd, even: even }"
           >
-            <list-product [product]="product"></list-product>
+            <list-product
+              (addToCartEvent)="addToCart($event)"
+              [product]="product"
+            ></list-product>
           </li>
         </ul>
       </ng-template>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Product } from '../../../model/Product';
 import { ProductService } from '../../../Service/product.service';
@@ -17,13 +17,12 @@ import { ProductService } from '../../../Service/product.service';
   providers: [ProductService],
 })
 export class ListProductComponent {
+  @Output() addToCartEvent = new EventEmitter<Product>();
   @Input() product: Product;
 
   constructor(private ProductService: ProductService) {}
 
   add() {
-    // this.ProductService.addToCart = this.product;
-    // console.log(this.ProductService.getCart);
-    console.log('hellop');
+    this.addToCartEvent.emit(this.product);
   }
 }

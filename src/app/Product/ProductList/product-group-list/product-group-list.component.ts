@@ -40,31 +40,31 @@ export class ProductGroupListComponent implements OnInit {
   comments: any = [];
 
   // dependency injection
-  constructor(private ProductService: ProductService) {}
+  constructor(private ProductService: ProductService) {
+    this.productsTemp = this.products = this.ProductService.getProducts;
+    this.brandName = this.ProductService.getBrandNames;
+  }
 
   ngOnInit(): void {
-    this.data.load(this.ProductService.getData);
-    setTimeout(() => {
-      if (!this.data.products) return console.warn('data pending');
-
-      this.data.products.map((data: any) => {
-        this.ProductService.addNewProduct = new Product().add(
-          data.id,
-          data.Name,
-          data.Price,
-          data.Description,
-          data.Brand,
-          data.Quantity,
-          data.Usage,
-          data.Rating
-        );
-      });
-
-      // using getter to load all data
-      this.productsTemp = this.products = this.ProductService.getProducts;
-      this.brandName = this.ProductService.getBrandNames;
-      console.log(this.ProductService.getProducts);
-    }, 500);
+    // this.data.load(this.ProductService.getData);
+    // setTimeout(() => {
+    //   if (!this.data.products) return console.warn('data pending');
+    //   this.data.products.map((data: any) => {
+    //     this.ProductService.addNewProduct = new Product().add(
+    //       data.id,
+    //       data.Name,
+    //       data.Price,
+    //       data.Description,
+    //       data.Brand,
+    //       data.Quantity,
+    //       data.Usage,
+    //       data.Rating
+    //     );
+    //   });
+    //   // using getter to load all data
+    //   this.productsTemp = this.products = this.ProductService.getProducts;
+    //   this.brandName = this.ProductService.getBrandNames;
+    // }, 500);
   }
   /**
    * Sorts by Product Price
@@ -139,5 +139,16 @@ export class ProductGroupListComponent implements OnInit {
   clearFilter() {
     this.products = this.productsTemp;
     this.isFilterActive = false;
+  }
+
+  addToCart(product: Product) {
+    if (this.ProductService.getCart.includes(product)) return;
+    this.ProductService.addToCart(product);
+    console.log(this.ProductService.getCart);
+  }
+
+  showCart() {
+    console.log(this.ProductService.getCart);
+    console.log(localStorage.getItem('cart'));
   }
 }
