@@ -120,6 +120,8 @@ export class ProductService {
     // ),
   ];
 
+  cart: Product[] = [];
+
   /**
    * Calling from API
    */
@@ -153,6 +155,13 @@ export class ProductService {
    */
   public set addNewProduct(product: Product) {
     this.products.push(product);
+  }
+
+  public set addToCart(product: Product) {
+    this.cart.push(product);
+  }
+  public get getCart() {
+    return this.cart;
   }
 
   /**

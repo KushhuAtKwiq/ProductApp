@@ -7,6 +7,6 @@
     <p class="product-description">{{ product.description }}</p>
     <div class="rating-slider">{{ product.rating }}</div>
     <div class="product-price">${{ product.price }}</div>
-    <button type="button" class="cart-btn">Add to cart</button>
+    <button type="button" (click)="add()" class="cart-btn">Add to cart</button>
   </div>
 </div>
