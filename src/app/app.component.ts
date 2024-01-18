@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { ProductGroupListComponent } from './ProductList/product-group-list/product-group-list.component';
+import { ProductGroupListComponent } from './Product/ProductList/product-group-list/product-group-list.component';
+
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',

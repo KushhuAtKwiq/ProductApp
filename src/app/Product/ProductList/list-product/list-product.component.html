@@ -1,0 +1,12 @@
+<div class="list-container">
+  <img src="#IMGAGE" alt="" [routerLink]="[product.id]" class="product-img" />
+  <div class="product-details">
+    <h2>
+      <a [routerLink]="[product.id]">{{ product.name }}</a>
+    </h2>
+    <p class="product-description">{{ product.description }}</p>
+    <div class="rating-slider">{{ product.rating }}</div>
+    <div class="product-price">${{ product.price }}</div>
+    <button type="button" class="cart-btn">Add to cart</button>
+  </div>
+</div>

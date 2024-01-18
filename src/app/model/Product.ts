@@ -1,4 +1,4 @@
-type Item = {
+export interface Item {
   id: number;
   name: string;
   price: number;
@@ -7,9 +7,9 @@ type Item = {
   quantity: number;
   usage: boolean; // 0 - indoor || 1 - outdoor
   rating: number;
-};
+}
 
-export class Product {
+export class Product implements Item {
   id: number;
   name: string;
   price: number;
@@ -19,7 +19,7 @@ export class Product {
   usage: boolean;
   rating: number;
 
-  addDetails(
+  add(
     id: number,
     name: string,
     price: number,

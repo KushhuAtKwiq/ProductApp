@@ -1,0 +1,62 @@
+<aside class="filters">
+  <div class="head">
+    <h3></h3>
+    <button
+      [disabled]="!isFilterActive"
+      type="button"
+      (click)="clearFilter()"
+      class="clear"
+    >
+      Clear
+    </button>
+  </div>
+
+  <!-- PRICE FILTER -->
+  <select
+    name="price-filter"
+    [(ngModel)]="filter.price"
+    (ngModelChange)="sortPrice()"
+    class="price"
+  >
+    <option [disabled]="true" [ngValue]="'default'">Price</option>
+    <option [ngValue]="false">$ High to Low</option>
+    <option [ngValue]="true">$ Low to High</option>
+  </select>
+
+  <!-- RATING FILTER -->
+  <select
+    name="rating-filter"
+    [(ngModel)]="filter.rating"
+    (ngModelChange)="sortRating()"
+    class="rating"
+  >
+    <option [disabled]="true" [ngValue]="'default'">Rating</option>
+    <option [ngValue]="true">* High to Low</option>
+    <option [ngValue]="false">* Low to High</option>
+  </select>
+
+  <!-- USAGE FILTER -->
+  <select
+    name="usage-filter"
+    [(ngModel)]="filter.usage"
+    (ngModelChange)="sortUsage()"
+    class="usage"
+  >
+    <option [disabled]="true" [ngValue]="'default'">Usage</option>
+    <option [ngValue]="false">Indoor</option>
+    <option [ngValue]="true">Outdoor</option>
+  </select>
+
+  <!-- BRAND FILTER -->
+  <select
+    name="brand-filter"
+    [(ngModel)]="filter.brand"
+    (ngModelChange)="sortBrand()"
+    class="brand"
+  >
+    <option [disabled]="true" [ngValue]="'default'">Select Brand</option>
+    <option *ngFor="let product of brandNames" [ngValue]="product">
+      {{ product }}
+    </option>
+  </select>
+</aside>

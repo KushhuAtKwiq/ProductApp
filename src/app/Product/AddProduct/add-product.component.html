@@ -1,0 +1,46 @@
+<div class="form-container">
+  <form [formGroup]="productForm">
+    <h1>ADD PRODUCTS</h1>
+    <BR />
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" formControlName="Name" />
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" formControlName="Price" />
+
+    <label for="description">Product Description:</label>
+    <textarea cols="52.5" rows="5"
+      id="description"
+      formControlName="Description"
+    ></textarea>
+
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" formControlName="Brand" />
+
+    <label for="quantity">Quantity:</label>
+    <input type="text" id="quantity" formControlName="Quantity" />
+
+    <div class="radio-group">
+      <label for="indoor">Indoor</label>
+      <input
+        type="radio"
+        id="indoor"
+        name="Usage"
+        [value]="false"
+        formControlName="Usage"
+      />
+
+      <label for="outdoor">Outdoor</label>
+      <input
+        type="radio"
+        id="outdoor"
+        name="Usage"
+        [value]="true"
+        formControlName="Usage"
+      />
+    </div>
+
+    <input type="submit" value="Submit" (click)="submitForm()" />
+    <input type="button" value="Clear" (click)="clearForm()" />
+  </form>
+</div>

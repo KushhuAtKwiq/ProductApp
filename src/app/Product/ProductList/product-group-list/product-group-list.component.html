@@ -1,0 +1,69 @@
+<header>
+  <nav>
+    <div class="search-bar">
+      <input type="text" class="search" placeholder="Search..." />
+    </div>
+    <filter
+      (sortByPriceEvent)="sortByPrice($event)"
+      (sortByRatingEvent)="sortByRating($event)"
+      (sortByUsageEvent)="sortByUsage($event)"
+      (sortByBrandEvent)="sortByBrand($event)"
+      (clearFilterEvent)="clearFilter()"
+      [isFilterActive]="isFilterActive"
+      [brandNames]="brandName"
+    >
+    </filter>
+    <a [routerLink]="['add']">Add Product</a>
+  </nav>
+</header>
+<main>
+  <section>
+    <h3 *ngIf="data.isLoading; else gotData">loading...</h3>
+    <ng-template #gotData>
+      <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
+      <ng-template #showProduct>
+        <ul>
+          <li
+            *ngFor="let product of products; let even = even; let odd = odd"
+            [ngClass]="{ odd: odd, even: even }"
+          >
+            <list-product [product]="product"></list-product>
+          </li>
+        </ul>
+      </ng-template>
+    </ng-template>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Contact Us</h4>
+        <p></p>
+      </div>
+      <div class="col-md-4">
+        <h4>Quick Links</h4>
+        <ul class="list-unstyled">
+          <a href="#">Home</a>
+          <br />
+          <a href="#">About Us</a>
+          <br />
+          <a href="#">Contact Us</a>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4>Stay Connected</h4>
+        <p>Follow us on social media for the latest updates and promotions.</p>
+      </div>
+    </div>
+    <hr />
+
+    <div class="row">
+      <div class="col-md-12">
+        <p class="text-center">
+          &copy; 2024 Your E-Commerce Store. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
