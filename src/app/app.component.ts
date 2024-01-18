@@ -4,10 +4,16 @@ import { RouterOutlet } from '@angular/router';
 import { ProductGroupListComponent } from './Product/ProductList/product-group-list/product-group-list.component';
 
 import { HttpClientModule } from '@angular/common/http';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, ProductGroupListComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    ProductGroupListComponent,
+    HttpClientModule,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

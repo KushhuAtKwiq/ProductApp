@@ -9,17 +9,17 @@
     <input type="text" id="price" formControlName="price" />
 
     <label for="description">Product Description:</label>
-    <input type="text" id="description" formControlName="Description" />
+    <input type="text" id="description" formControlName="description" />
 
     <label for="brand">Brand:</label>
     <input type="text" id="brand" formControlName="brand" />
 
     <label for="quantity">Quantity:</label>
-    <input type="text" id="quantity" formControlName="Quantity" />
+    <input type="text" id="quantity" formControlName="quantity" />
 
     <label for="usage">Usage:</label>
     <input type="text" id="usage" formControlName="usage" />
 
-    <button type="submit">Submit</button>
+    <input type="submit" value="Submit" (click)="submitForm()">
   </form>
 </div>

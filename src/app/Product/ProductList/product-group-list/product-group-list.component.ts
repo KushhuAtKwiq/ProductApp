@@ -29,7 +29,7 @@ import { Perform } from '../../../model/perform.class';
 })
 export class ProductGroupListComponent implements OnInit {
   productsTemp: Product[];
-  products: Product[];
+  products: Product[] = [];
   brandName: string[];
   isFilterActive: boolean;
   ProductData: Object[] = [];
@@ -40,37 +40,31 @@ export class ProductGroupListComponent implements OnInit {
   comments: any = [];
 
   // dependency injection
-  constructor(private ProductService: ProductService) {
-    // using getter to load all data
-    this.productsTemp = this.products = this.ProductService.getProducts;
-    this.brandName = ProductService.getBrandNames;
-  }
+  constructor(private ProductService: ProductService) {}
 
   ngOnInit(): void {
-    this.data.load(this.ProductService.get);
-    // if (this.data.products)
-    //   this.ProductService.addNewProduct = this.data.products[0];
-    // console.log(this.ProductService.getProducts);
-
+    this.data.load(this.ProductService.getData);
     setTimeout(() => {
-      if (this.data.products)
-        this.data.products.map((data: any) => {
-          this.ProductService.addNewProduct = new Product().add(
-            data.id,
-            data.name,
-            data.price,
-            data.description,
-            data.brand,
-            data.quantity,
-            data.usage,
-            data.rating
-          );
-        });
+      if (!this.data.products) return console.warn('data pending');
+
+      this.data.products.map((data: any) => {
+        this.ProductService.addNewProduct = new Product().add(
+          data.id,
+          data.name,
+          data.Price,
+          data.Description,
+          data.Brand,
+          data.Quantity,
+          data.Usage,
+          data.Rating
+        );
+      });
+
+      // using getter to load all data
+      this.productsTemp = this.products = this.ProductService.getProducts;
+      this.brandName = this.ProductService.getBrandNames;
       console.log(this.ProductService.getProducts);
     }, 500);
-
-    // this.ProductService.get.subscribe((data) => (this.ProductData = data));
-    // console.log(this.ProductData);
   }
   /**
    * Sorts by Product Price
@@ -81,7 +75,6 @@ export class ProductGroupListComponent implements OnInit {
    */
   sortByPrice(type: string | boolean) {
     if (type == 'default') return;
-    if (!this.data.isLoading) console.log(this.data.products);
 
     this.isFilterActive = true;
     this.products = type
