@@ -123,7 +123,7 @@ export class ProductService {
   /**
    * Calling from API
    */
-  private baseUrl = 'https:localhost:3000/products';
+  private baseUrl = 'https://localhost:3000/product';
   ProductData: Product[];
 
   constructor(private http: HttpClient) {}
@@ -132,6 +132,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.baseUrl);
   }
   public postData(data: any): Observable<any> {
+    console.log(data);
+
     return this.http.post(this.baseUrl, data);
   }
 
