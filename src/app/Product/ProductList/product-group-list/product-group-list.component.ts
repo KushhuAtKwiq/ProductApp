@@ -50,7 +50,7 @@ export class ProductGroupListComponent implements OnInit {
       this.data.products.map((data: any) => {
         this.ProductService.addNewProduct = new Product().add(
           data.id,
-          data.name,
+          data.Name,
           data.Price,
           data.Description,
           data.Brand,

@@ -25,15 +25,18 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const ID: number = params['id'];
-      this.currProduct = this.ProductService.getProduct(ID);
-    });
+    setTimeout(() => {
+      this.route.params.subscribe((params) => {
+        const ID: number = params['id'];
+        this.currProduct = this.ProductService.getProduct(ID);
+      });
+      console.log(this.ProductService.getProducts);
 
-    // if given product id does not exist
-    if (!this.currProduct) {
-      console.warn('no Product exist!');
-      return;
-    }
+      // if given product id does not exist
+      if (!this.currProduct) {
+        console.warn('no Product exist!');
+        return;
+      }
+    }, 500);
   }
 }
