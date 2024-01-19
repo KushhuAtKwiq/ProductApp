@@ -16,10 +16,11 @@ export class ProductCartComponent implements OnInit {
   isLoading: boolean;
   cartData: Product[];
 
-  constructor(private ProductService: ProductService) {
+  constructor(private ProductService: ProductService) {}
+
+  ngOnInit(): void {
     this.loadData();
   }
-  ngOnInit(): void {}
 
   loadData() {
     this.cartData = this.ProductService.getCart;

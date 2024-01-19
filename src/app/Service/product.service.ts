@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, lastValueFrom } from 'rxjs';
 import { Product } from '../model/Product';
@@ -6,7 +6,7 @@ import { Product } from '../model/Product';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
+export class ProductService implements OnChanges {
   products: Product[] = [
     // new Product().add(
     //   10293,
@@ -121,6 +121,9 @@ export class ProductService {
   ];
 
   cart: Product[] = [];
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 
   /**
    * Calling from API

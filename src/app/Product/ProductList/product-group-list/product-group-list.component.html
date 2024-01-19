@@ -13,8 +13,12 @@
       [brandNames]="brandName"
     >
     </filter>
-    <a [routerLink]="['add']">Add Product</a>
-    <a [routerLink]="['cart']" (click)="showCart()">show Cart</a>
+    <a [routerLink]="['add']" class="header-btn">
+      <span class="text">Add Product</span><span>LET'S GO</span></a
+    >
+    <a [routerLink]="['cart']" class="header-btn" (click)="showCart()"
+      ><span class="text">Show Cart</span><span>LET'S GO</span></a
+    >
   </nav>
 </header>
 <main>

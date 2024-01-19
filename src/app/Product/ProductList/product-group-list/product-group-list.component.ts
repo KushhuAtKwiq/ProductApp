@@ -49,7 +49,6 @@ export class ProductGroupListComponent {
       error: (error) => {
         return console.log(error);
       },
-
       complete: () => {
         this.dataLength = this.dataLength / this.productsPerPage;
         this.pagination = Array(Math.ceil(this.dataLength))
