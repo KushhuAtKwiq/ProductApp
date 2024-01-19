@@ -14,17 +14,32 @@
     >
     </filter>
     <a [routerLink]="['add']">Add Product</a>
-    <button type="button" (click)="showCart()">CART</button>
+    <a [routerLink]="['cart']" (click)="showCart()">show Cart</a>
   </nav>
 </header>
 <main>
   <section>
-    <h3 *ngIf="data.isLoading; else gotData">loading...</h3>
-    <!-- <h3  *ngIf="data.isLoading || data.hasError; else gotData">
-      Error Loading Data {{ data.hasError }} -- {{ data.isLoading }}
-    </h3> -->
+    <div class="pagination">
+      <button (click)="changePage('prev')" [disabled]="currentPage === 1">
+        Prev
+      </button>
+      <span *ngIf="dataLength">
+        <span *ngFor="let item of pagination">
+          <button
+            type="button"
+            (click)="loadData(item)"
+          >
+            {{ item }}
+          </button>
+        </span>
+      </span>
+      <button (click)="changePage('next')">Next</button>
+    </div>
+
+    <h3 *ngIf="isLoading; else gotData">loading...</h3>
     <ng-template #gotData>
       <h3 *ngIf="!products.length; else showProduct">No products to show</h3>
+
       <ng-template #showProduct>
         <ul>
           <li

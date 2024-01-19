@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductGroupListComponent } from './ProductList/product-group-list/product-group-list.component';
 import { ProductComponent } from './ProductPage/product/product.component';
 import { AddProductComponent } from './AddProduct/add-product.component';
+import { ProductCartComponent } from './product-cart/product-cart.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,12 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddProductComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'cart',
+    component: ProductCartComponent,
+    pathMatch: 'full',
   },
   { path: ':id', component: ProductComponent },
 ];

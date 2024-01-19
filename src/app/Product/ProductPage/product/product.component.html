@@ -4,21 +4,21 @@
   <main>
     <img src="" alt="" />
     <aside class="center">
-      <p>id:{{ this.data.products?.id }}</p>
-      <h1>{{ this.data.products?.Name }}</h1>
-      <p>{{ this.data.products?.Description }}</p>
-      <p>⭐⭐⭐{{ this.data.products?.Rating }}</p>
-      <p>Price: ${{ this.data.products?.Price }}</p>
+      <p>id:{{ currProduct.id }}</p>
+      <h1>{{ currProduct.name }}</h1>
+      <p>{{ currProduct.description }}</p>
+      <p>⭐⭐⭐{{ currProduct.rating }}</p>
+      <p>Price: ${{ currProduct.price }}</p>
       <p>
         It can be used
-        <b *ngIf="!this.data.products?.Usage">Indoor </b>
-        <b *ngIf="this.data.products?.Usage">Outdoor</b>
+        <b *ngIf="!currProduct.usage">Indoor </b>
+        <b *ngIf="currProduct.usage">Outdoor</b>
       </p>
       <p>
         Brand:
-        <b> {{ this.data.products?.Brand }}</b>
+        <b> {{ currProduct.brand }}</b>
       </p>
-      <p>{{ this.data.products?.Quantity }} items available</p>
+      <p>{{ currProduct.quantity }} items available</p>
     </aside>
   </main>
 </ng-template>

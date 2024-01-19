@@ -13,44 +13,47 @@ import { Perform } from '../../../model/perform.class';
   styleUrl: './product.component.css',
   providers: [ProductService],
 })
-export class ProductComponent implements OnInit {
-  data = new Perform<any>();
+export class ProductComponent   {
+  data: any;
   currProduct: Product;
 
   constructor(
     private ProductService: ProductService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit() {
-    var id: number;
-    this.route.params.subscribe((params) => {
-      id = params['id'];
-      this.data.load(this.ProductService.getProduct(id));
-    });
-
-    // if given product id does not exist
-    setTimeout(() => {
-      if (!this.data.products) {
-        console.warn('no Product exist!');
-        return;
-      }
-      console.log(this.data.products);
-      if (this.data.products)
-        this.currProduct = new Product().add(
-          this.data.products.id,
-          this.data.products.name,
-          this.data.products.price,
-          this.data.products.description,
-          this.data.products.brand,
-          this.data.products.quantity,
-          this.data.products.usage,
-          this.data.products.rating
-        );
-
-      // console.log(this.currProduct);
-    }, 1000);
+  ) {
+    this.loadData();
   }
 
-  getID() {}
+  loadData() {
+    let id: number = 0;
+    this.route.params.subscribe((params) => {
+      id = params['id'];
+    });
+    this.ProductService.getProductData(id).subscribe({
+      next: (data) => (this.data = data),
+
+      error: (error) => {
+        return console.log(error);
+      },
+      
+      complete: () => {
+        if (!this.data) {
+          console.warn('no Product exist!');
+          return;
+        }
+        console.log(this.data);
+        this.currProduct = new Product().add(
+          this.data.id,
+          this.data.Name,
+          this.data.Price,
+          this.data.Description,
+          this.data.Brand,
+          this.data.Quantity,
+          this.data.Usage,
+          this.data.Rating
+        );
+        console.log(this.currProduct);
+      },
+    });
+  }
 }

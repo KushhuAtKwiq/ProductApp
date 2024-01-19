@@ -161,7 +161,7 @@ select > option {
 }
 
 ul {
-  padding: 5rem 0;
+  padding: 1rem 0;
 }
 
 ul li {
@@ -215,4 +215,29 @@ ul.list-inline li {
 
 hr {
   border-top: 1px solid #dee2e6;
+}
+
+.pagination {
+  padding: 0 15rem;
+}
+.pagination > * {
+  margin: 0 1rem;
+}
+.pagination > button {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 0.6rem 1.3rem;
+  background-color: #41403e;
+  /* border-radius: 1rem; */
+  color: white;
+}
+
+.pagination > span > span > button {
+  padding: 0.6rem 1.3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  transition: background-color 0.4s ease-out;
+}
+
+.pagination > span > span > button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }

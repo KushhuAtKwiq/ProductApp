@@ -37,6 +37,7 @@ export class AddProductComponent {
       this.ProductService.postData(formData).subscribe((response) => {
         if (response !== null) {
           alert('Data submitted successfully');
+          this.productForm.reset();
         } else {
           alert('Error submitting form data. Please try again.');
         }

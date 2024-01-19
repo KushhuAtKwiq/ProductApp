@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ListProductComponent } from '../list-product/list-product.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
@@ -22,50 +22,91 @@ import { Perform } from '../../../model/perform.class';
     FormsModule,
     ListProductComponent,
     FilterComponent,
+    NgFor,
   ],
   templateUrl: './product-group-list.component.html',
   styleUrl: './product-group-list.component.css',
   providers: [ProductService],
 })
-export class ProductGroupListComponent implements OnInit {
+export class ProductGroupListComponent {
   productsTemp: Product[];
   products: Product[] = [];
   brandName: string[];
   isFilterActive: boolean;
-  ProductData: Object[] = [];
-  data = new Perform<Product[]>();
 
-  private baseUrl = 'http://localhost:3000/product';
+  isLoading: boolean;
+  data: Product[];
+  dataLength: number;
+  pagination: number[];
 
-  comments: any = [];
+  currentPage = 1;
+  productsPerPage = 5;
 
   // dependency injection
   constructor(private ProductService: ProductService) {
-    this.productsTemp = this.products = this.ProductService.getProducts;
-    this.brandName = this.ProductService.getBrandNames;
+    this.ProductService.getLength().subscribe({
+      next: (length) => (this.dataLength = length),
+      error: (error) => {
+        return console.log(error);
+      },
+
+      complete: () => {
+        this.dataLength = this.dataLength / this.productsPerPage;
+        this.pagination = Array(Math.ceil(this.dataLength))
+          .fill(0)
+          .map((x, i) => i + 1);
+      },
+    });
+    this.loadData();
   }
 
-  ngOnInit(): void {
-    // this.data.load(this.ProductService.getData);
-    // setTimeout(() => {
-    //   if (!this.data.products) return console.warn('data pending');
-    //   this.data.products.map((data: any) => {
-    //     this.ProductService.addNewProduct = new Product().add(
-    //       data.id,
-    //       data.Name,
-    //       data.Price,
-    //       data.Description,
-    //       data.Brand,
-    //       data.Quantity,
-    //       data.Usage,
-    //       data.Rating
-    //     );
-    //   });
-    //   // using getter to load all data
-    //   this.productsTemp = this.products = this.ProductService.getProducts;
-    //   this.brandName = this.ProductService.getBrandNames;
-    // }, 500);
+  loadData(pageNumber?: number) {
+    this.isLoading = true;
+    if (pageNumber) this.currentPage = pageNumber;
+    this.ProductService.getPaginatedItems(
+      this.currentPage,
+      this.productsPerPage
+    ).subscribe({
+      next: (data) => (this.data = data),
+
+      error: (error) => {
+        return console.log(error);
+      },
+
+      complete: () => {
+        this.isLoading = false;
+        console.log(this.data);
+        this.ProductService.deleteAllData();
+        this.data.map((data: any) => {
+          this.ProductService.addNewProduct = new Product().add(
+            data.id,
+            data.Name,
+            data.Price,
+            data.Description,
+            data.Brand,
+            data.Quantity,
+            data.Usage,
+            data.Rating
+          );
+        });
+        this.productsTemp = this.products = this.ProductService.getProducts;
+        this.brandName = this.ProductService.getBrandNames;
+      },
+    });
   }
+
+  changePage(direction: 'prev' | 'next') {
+    if (direction === 'prev' && this.currentPage > 0) {
+      this.currentPage--;
+    } else if (
+      direction === 'next' &&
+      this.currentPage > this.pagination.length + 1
+    ) {
+      this.currentPage++;
+    }
+    this.loadData();
+  }
+
   /**
    * Sorts by Product Price
    *
