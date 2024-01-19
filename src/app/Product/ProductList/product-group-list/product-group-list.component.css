@@ -241,3 +241,8 @@ hr {
 .pagination > span > span > button:hover {
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+.pagination button:active {
+  background-color: black;
+  color: wheat;
+}

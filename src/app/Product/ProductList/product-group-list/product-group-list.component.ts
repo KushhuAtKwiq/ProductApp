@@ -99,8 +99,9 @@ export class ProductGroupListComponent {
     if (direction === 'prev' && this.currentPage > 0) {
       this.currentPage--;
     } else if (
-      direction === 'next' &&
-      this.currentPage > this.pagination.length + 1
+      direction === 'next'
+      // &&
+      // this.currentPage < this.pagination.length
     ) {
       this.currentPage++;
     }
@@ -183,9 +184,8 @@ export class ProductGroupListComponent {
   }
 
   addToCart(product: Product) {
-    if (this.ProductService.getCart.includes(product)) return;
+    // if (this.ProductService.getCart.includes(product)) return;
     this.ProductService.addToCart(product);
-    console.log(this.ProductService.getCart);
   }
 
   showCart() {

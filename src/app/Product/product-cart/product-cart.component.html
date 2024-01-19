@@ -1,3 +1,25 @@
 <ul>
-  <li *ngFor="let item of cartData; let i = index">{{ i }}-- {{ item }}</li>
+  <li
+    *ngFor="let product of cartData; let even = even; let odd = odd"
+    [ngClass]="{ odd: odd, even: even }"
+  >
+    <div class="list-container">
+      <img
+        src="#IMGAGE"
+        alt=""
+        class="product-img"
+      />
+      <div class="product-details">
+        <h2>
+          <a>{{ product.name }}</a>
+        </h2>
+        <p class="product-description">{{ product.description }}</p>
+        <div class="rating-slider">{{ product.rating }}</div>
+        <div class="product-price">${{ product.price }}</div>
+        <button type="button" (click)="delete(product)" class="cart-btn">
+          delete
+        </button>
+      </div>
+    </div>
+  </li>
 </ul>

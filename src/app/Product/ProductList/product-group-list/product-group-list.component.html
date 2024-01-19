@@ -28,6 +28,7 @@
           <button
             type="button"
             (click)="loadData(item)"
+            [ngClass]="{ 'active-page': item === currentPage }"
           >
             {{ item }}
           </button>

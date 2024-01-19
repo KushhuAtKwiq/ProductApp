@@ -120,27 +120,19 @@ export class ProductService {
     // ),
   ];
 
-  cart: Product[] = [
-    // new Product().add(
-    //   12,
-    //   'Modern Ceramic Planter with Stand',
-    //   39,
-    //   'Add a touch of nature and sophistication...',
-    //   'Urban Bloom',
-    //   15,
-    //   false,
-    //   4
-    // ),
-  ];
+  cart: Product[] = [];
 
   /**
    * Calling from API
    */
   // private baseUrl = 'https://fakestoreapi.com/products/';
   private baseUrl = 'http://localhost:3000/product/';
-  ProductData: Product[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    let cat = localStorage.getItem('cart');
+    if (cat == null) return;
+    this.cart = JSON.parse(cat);
+  }
 
   public getData() {
     return this.http.get<Product[]>(this.baseUrl);
@@ -170,11 +162,20 @@ export class ProductService {
   }
 
   public addToCart(product: Product) {
+    if (this.cart.includes(product)) return;
+
     this.cart.push(product);
     localStorage.setItem('cart', JSON.stringify(this.cart));
   }
+
+  public deleteProductCart(product: Product) {
+    this.cart = this.cart.filter((item) => item != product);
+    if (!this.cart) localStorage.clear();
+    else localStorage.setItem('cart', JSON.stringify(this.cart));
+    console.log(this.cart);
+  }
+
   public get getCart() {
-    // console.log(...this.cart);
     return this.cart;
   }
 

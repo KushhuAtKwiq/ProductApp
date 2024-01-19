@@ -22,6 +22,7 @@ export class ListProductComponent {
 
   constructor(private ProductService: ProductService) {}
 
+  
   add() {
     this.addToCartEvent.emit(this.product);
   }
